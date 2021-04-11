@@ -2,33 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Pagination, Table, Tag, Space } from "antd";
 
 const StockList = ({ list }) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [offset, setOffset] = useState(0);
-    const [pageSize, setPageSize] = useState(200);
-    const [currentPageElements, setCurrentPageElements] = useState(null);
-
-    useEffect(() => {
-        const elements =
-            list && list.length && list.slice(offset, offset + pageSize);
-        setCurrentPageElements(elements);
-    }, [list, pageSize, currentPage, offset]);
-
-    useEffect(() => {
-        setCurrentPage(1);
-        setOffset(0);
-    }, [list]);
-
-    const handleChange = (page) => {
-        console.log(page, "page");
-        const offsetNumber = (page - 1) * pageSize;
-        setOffset(offsetNumber);
-        setCurrentPage(page);
-    };
-
     const columns = [
-        { title: "Symbol", dataIndex: "symbol" },
-        { title: "Name", dataIndex: "name" },
-        { title: "Price", dataIndex: "price" },
+        {
+            title: "Symbol",
+            dataIndex: "symbol",
+            key: "symbol",
+            // sorter: (a, b) => a.symbol < b.symbol,
+            // sortDirections: ["ascend"],
+            defaultSortOrder: "ascend",
+        },
+        { title: "Name", dataIndex: "name", key: "name" },
+        { title: "Price", dataIndex: "price", key: "price" },
     ];
 
     return (
@@ -37,7 +21,7 @@ const StockList = ({ list }) => {
                 dataSource={list}
                 columns={columns}
                 pagination={{ position: ["topRight", "bottomRight"] }}
-                scroll
+                scroll={{ y: "100vw" }}
                 size="small"
             />
         </div>
