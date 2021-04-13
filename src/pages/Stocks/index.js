@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Input, Alert } from "antd";
 
 import { useApi } from "../../hooks/useApi";
@@ -6,11 +6,13 @@ import { fetchSymbolsList } from "../../services/requests";
 import StockList from "../../components/StockList";
 import Chart from "../../components/Chart";
 import styles from "./styles.module.scss";
+import { StoreContext } from "../../context/StoreContext";
 
 const Stocks = () => {
     const [data, isLoading, error] = useApi(fetchSymbolsList);
     const [query, setQuery] = useState("");
     const [filteredData, setFilteredData] = useState();
+    const { selectedStock } = useContext(StoreContext);
 
     useEffect(() => {
         const queryUpper = query?.toUpperCase();
@@ -52,9 +54,7 @@ const Stocks = () => {
                 />
                 <StockList list={filteredData} isLoading={isLoading} />
             </div>
-            <div>
-                <Chart />
-            </div>
+            <div>{selectedStock && <Chart />}</div>
         </div>
     );
 };

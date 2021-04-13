@@ -7,6 +7,7 @@ import {
     FileSearchOutlined,
 } from "@ant-design/icons";
 
+import HomePage from "../HomePage";
 import "./index.css";
 import Stocks from "../Stocks";
 
@@ -44,8 +45,7 @@ function App() {
                     <Content>
                         <Switch>
                             <Route path="/stocks" component={Stocks} />
-                            {/* <Route path="/screener" component={Screener} /> */}
-                            <Route path="/"></Route>
+                            <Route path="/" component={HomePage}></Route>
                         </Switch>
                     </Content>
                 </Layout>
