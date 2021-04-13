@@ -1,0 +1,43 @@
+.StockList {
+    min-height: 100%;
+    [class~="ant-table-wrapper"] {
+        height: calc(100vh - 50px);
+    }
+
+    [class~="ant-table-container"] {
+        height: calc(100% - 40px);
+    }
+    [class~="ant-spin-nested-loading"] {
+        height: 100%;
+    }
+    [class~="ant-spin-container"] {
+        height: 100%;
+    }
+    [class~="ant-table"] {
+        height: calc(100% - 50px);
+    }
+    [class~="ant-table-body"] {
+        height: 100%;
+    }
+    [class~="ant-spin-nested-loading"] {
+        height: 100%;
+    }
+    [class~="ant-table-empty"] {
+        table {
+            height: 100%;
+        }
+    }
+    [class~="ant-table-thead"] {
+        font-size: 0.9rem;
+    }
+}
+
+.StockCell {
+    .stockSymbol {
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    .stockName {
+        font-size: 0.8rem;
+    }
+}

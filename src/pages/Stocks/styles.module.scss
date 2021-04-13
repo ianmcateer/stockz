@@ -1,9 +1,4 @@
 .Stocks {
-    width: 50%;
-    height: 100vh;
-}
-
-.SearchResult {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 500px 2fr;
 }

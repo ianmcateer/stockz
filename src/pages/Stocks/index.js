@@ -1,77 +1,60 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Input, AutoComplete } from "antd";
-import { debounce } from "lodash";
+import React, { useState, useEffect } from "react";
+import { Input, Alert } from "antd";
 
 import { useApi } from "../../hooks/useApi";
 import { fetchSymbolsList } from "../../services/requests";
 import StockList from "../../components/StockList";
-
+import Chart from "../../components/Chart";
 import styles from "./styles.module.scss";
 
 const Stocks = () => {
     const [data, isLoading, error] = useApi(fetchSymbolsList);
     const [query, setQuery] = useState("");
     const [filteredData, setFilteredData] = useState();
-    const [selectedItem, setSelectedItem] = useState();
 
     useEffect(() => {
+        const queryUpper = query?.toUpperCase();
         const filteredResults = data?.filter((item, index) => {
             return (
-                item.symbol.includes(query) ||
-                item.name.toUpperCase().includes(query)
+                item.symbol.includes(queryUpper) ||
+                item.name?.toUpperCase().includes(queryUpper)
             );
         });
         setFilteredData(filteredResults);
-    }, [query, data, selectedItem]);
+    }, [query, data]);
 
-    useEffect(() => {
-        if (selectedItem) {
-            const filteredResults = data?.find((item, index) => {
-                return item.symbol === selectedItem;
-            });
-            setFilteredData([filteredResults]);
-        }
-    }, [selectedItem]);
+    const handleChange = (e) => setQuery(e.target.value?.toUpperCase());
 
-    const handleSearch = useCallback(
-        debounce((query) => {
-            setQuery(query.toUpperCase());
-        }, 280),
-        [query]
-    );
-
-    const onSelect = (value) => {
-        setSelectedItem(value);
-    };
-
-    const filteredOptions =
-        filteredData &&
-        Array.from(filteredData, (item) => ({
-            label: (
-                <div className={styles.SearchResult}>
-                    <span>{item.symbol}</span>
-                    <span>{item.name}</span>
-                </div>
-            ),
-            value: item.symbol,
-        }));
+    if (error) {
+        const errorMessage = JSON.stringify(error?.response?.data);
+        return (
+            <div>
+                <Alert
+                    message="Error"
+                    description={errorMessage}
+                    type="error"
+                    showIcon
+                />
+            </div>
+        );
+    }
 
     return (
         <div className={styles.Stocks}>
-            <AutoComplete
-                options={filteredOptions}
-                onSearch={handleSearch}
-                onSelect={onSelect}
-                disabled={isLoading}
-                style={{ width: "100%", display: "block" }}
-            >
+            <div>
                 <Input.Search
                     size="large"
                     placeholder="Symbol/Name"
                     enterButton
+                    onChange={handleChange}
+                    value={query}
+                    loading={isLoading}
                 />
-            </AutoComplete>
-            <StockList list={filteredData} />
+                <StockList list={filteredData} isLoading={isLoading} />
+            </div>
+            <div>
+                <Chart />
+            </div>
         </div>
     );
 };

@@ -26,35 +26,61 @@ axiosClient.interceptors.request.use((config) => {
     return config;
 });
 
-axiosClient.interceptors.response.use((response) => {
-    if (
-        response &&
-        response.data["Error Message"] &&
-        response.data["Error Message"].includes("Invalid API KEY")
-    ) {
-        const currentApiKey = response.config.params.apikey;
-        const currentApiKeyIndex = financialModellingPrepConfig.apiKeys.indexOf(
-            currentApiKey
-        );
+axiosClient.interceptors.response.use(
+    (response) => {
+        if (
+            response &&
+            response.data["Error Message"] &&
+            response.data["Error Message"].includes("Invalid API KEY")
+        ) {
+            const currentApiKey = response.config.params.apikey;
+            const currentApiKeyIndex = financialModellingPrepConfig.apiKeys.indexOf(
+                currentApiKey
+            );
 
-        // If ran out of apiKeys throw axios error
-        if (response.config.apiKeyIndex >= apiKeysLength - 1) {
-            throw new Error(ERRORS.NO_KEYS_LEFT);
+            // If ran out of apiKeys throw axios error
+            if (response.config.apiKeyIndex >= apiKeysLength - 1) {
+                throw new Error(ERRORS.NO_KEYS_LEFT);
+            }
+
+            const originalRequest = response.config;
+            originalRequest._retry = true;
+
+            // Set the new apikey using +1 element in array
+            response.config.params.apikey =
+                financialModellingPrepConfig.apiKeys[currentApiKeyIndex + 1];
+
+            return axiosClient(originalRequest);
         }
 
-        const originalRequest = response.config;
-        originalRequest._retry = true;
+        return response;
+    },
+    (error) => {
+        if (error && error.response && error.response.data["Error Message"]) {
+            const currentApiKey = error.response.config.params.apikey;
+            const currentApiKeyIndex = financialModellingPrepConfig.apiKeys.indexOf(
+                currentApiKey
+            );
 
-        // Set the new apikey using +1 element in array
-        response.config.params.apikey =
-            financialModellingPrepConfig.apiKeys[currentApiKeyIndex + 1];
+            // If API key used up all requests
+            if (error.response.config.apiKeyIndex >= apiKeysLength - 1) {
+                throw new Error(ERRORS.NO_KEYS_LEFT);
+            }
 
-        return axiosClient(originalRequest);
+            const originalRequest = error.response.config;
+            originalRequest._retry = true;
+
+            // Set the new apikey using +1 element in array
+            error.response.config.params.apikey =
+                financialModellingPrepConfig.apiKeys[currentApiKeyIndex + 1];
+
+            return axiosClient(originalRequest);
+        }
+
+        return error;
     }
+);
 
-    return response;
-});
-
-export const get = async (path) => {
-    return await axiosClient.get(path);
+export const get = async (path, config) => {
+    return await axiosClient.get(path, config);
 };

@@ -19,7 +19,7 @@ export const useApi = (service, ...options) => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [...options]);
 
     return [data, isLoading, error, fetchData];
 };
