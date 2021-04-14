@@ -31,3 +31,16 @@ export const fetchDailyHistoricalPrice = async (symbol, from, to) => {
         console.log(err, "err");
     }
 };
+
+export const stockScreener = async (params) => {
+    const queryString = Object.keys(params)
+        .map((key) => key + "=" + params[key])
+        .join("&");
+
+    try {
+        const { data } = await get(`/api/v3/stock-screener?${queryString}`);
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+};

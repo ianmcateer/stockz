@@ -25,7 +25,7 @@ const StockList = ({ list, isLoading }) => {
         { title: "Price", dataIndex: "price", key: "price", width: "0.5rem" },
     ];
 
-    const showTotal = () => <p> Total {list?.length} stocks</p>;
+    const showTotal = () => <p>Showing {list?.length} stocks</p>;
 
     return (
         <div className={styles.StockList}>

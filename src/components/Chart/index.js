@@ -14,19 +14,19 @@ const Chart = () => {
     );
 
     const { historical, symbol } = data || {};
-    console.log(historical, "historical");
 
     const formattedOptions =
         historical &&
         historical.length &&
         historical.reverse().map((item) => {
-            return [
-                new Date(item.date).getTime(),
-                item.open,
-                item.high,
-                item.low,
-                item.close,
-            ];
+            return { x: new Date(item.date).getTime(), y: item.close };
+            // return [
+            //     new Date(item.date).getTime(),
+            //     item.open,
+            //     item.high,
+            //     item.low,
+            //     item.close,
+            // ];
         });
 
     return (
@@ -36,25 +36,43 @@ const Chart = () => {
                     data: formattedOptions,
                 },
             ]}
-            type="candlestick"
-            width={900}
             height={500}
+            type="area"
             options={{
+                chart: {
+                    type: "area",
+                    zoom: {
+                        enabled: true,
+                    },
+                    toolbar: {
+                        autoSelected: "pan",
+                        show: true,
+                    },
+                },
+
                 title: {
                     text: symbol,
                     align: "left",
                 },
-                chart: {
-                    type: "candlestick",
-                    id: "candles",
+                subtitle: {
+                    text: "Price Movements",
+                    align: "left",
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    curve: "straight",
+                    width: 2,
                 },
                 xaxis: {
                     type: "datetime",
                 },
                 yaxis: {
-                    tooltip: {
-                        enabled: true,
-                    },
+                    opposite: true,
+                },
+                legend: {
+                    horizontalAlign: "left",
                 },
             }}
         />

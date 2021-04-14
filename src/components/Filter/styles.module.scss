@@ -1,68 +1,69 @@
-.Filter {
+.filter {
     color: red;
-}
-.Header {
-    font-size: 1.1rem;
 
-    line-height: 1;
-    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
-        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
-        Helvetica, sans-serif !important;
-    word-wrap: break-word;
-    white-space: nowrap;
-    outline: 0;
-    -webkit-text-size-adjust: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    z-index: 1;
-    position: relative;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-around;
-    transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-        -webkit-transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    left: 0px;
+    .header {
+        font-size: 1.1rem;
 
-    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
-        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
-        Helvetica, sans-serif !important;
-    word-wrap: break-word;
-    white-space: nowrap;
-    outline: 0;
-    -webkit-text-size-adjust: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    margin: 0;
-    user-select: none;
-    cursor: pointer;
-    display: inline-block;
-    padding: 6px 10px;
-    position: relative;
+        line-height: 1;
+        font-family: OpenSans-SemiBold, OpenSans-Regular,
+            SourceHanSansCN-Regular, PingFangSC-Medium, PingFangSC-Regular,
+            SourceHanSansCN-Normal, Arial, Helvetica, sans-serif !important;
+        word-wrap: break-word;
+        white-space: nowrap;
+        outline: 0;
+        -webkit-text-size-adjust: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        z-index: 1;
+        position: relative;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-around;
+        transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+            -webkit-transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        left: 0px;
 
-    line-height: 20px;
-    color: #0b90ff;
-    text-align: center;
+        font-family: OpenSans-SemiBold, OpenSans-Regular,
+            SourceHanSansCN-Regular, PingFangSC-Medium, PingFangSC-Regular,
+            SourceHanSansCN-Normal, Arial, Helvetica, sans-serif !important;
+        word-wrap: break-word;
+        white-space: nowrap;
+        outline: 0;
+        -webkit-text-size-adjust: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        margin: 0;
+        user-select: none;
+        cursor: pointer;
+        display: inline-block;
+        padding: 6px 10px;
+        position: relative;
 
-    &:after {
-        left: 50%;
-        width: 18px;
-        bottom: 0px;
-        height: 2px;
-        content: "";
-        display: block;
-        position: absolute;
-        transform: translate(-50%, 0);
-        background: #0b90ff;
-        border-radius: 1px;
+        line-height: 20px;
+        color: #0b90ff;
+        text-align: center;
+
+        &:after {
+            left: 50%;
+            width: 18px;
+            bottom: 0px;
+            height: 2px;
+            content: "";
+            display: block;
+            position: absolute;
+            transform: translate(-50%, 0);
+            background: #0b90ff;
+            border-radius: 1px;
+        }
     }
 }
 
-.Content {
+.content {
     line-height: 1;
     font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
         PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
@@ -101,7 +102,7 @@
     touch-action: auto;
 }
 
-.SectorFilter {
+.market {
     line-height: 1;
     font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
         PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
@@ -117,4 +118,108 @@
     user-select: none;
     position: relative;
     padding: 0 10px 20px;
+
+    &:after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: "";
+        position: absolute;
+        border-color: #e7eaef;
+        border-style: solid;
+        border-width: 0;
+        pointer-events: none;
+        border-color: #e7eaef;
+        border-bottom-width: 0.5px;
+        border-top-width: 0.5px;
+    }
+}
+
+.filterTitle {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    color: #09132c;
+    display: flex;
+    padding: 20px 0 10px;
+    font-size: 14px;
+    text-align: left;
+    align-items: center;
+    letter-spacing: 0.58px;
+    justify-content: space-between;
+}
+
+.inputContainer {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    font-size: 12px !important;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    width: 100%;
+    min-height: 80px;
+    display: flex;
+    padding: 5px 0;
+    align-items: center;
+}
+
+.inputTitle {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    flex: 0 0 120px;
+    color: rgba(9, 19, 44, 0.7);
+    height: 30px;
+    font-size: 12px;
+}
+
+.dropdown {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    font-size: 12px !important;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    flex: 1;
+    overflow: hidden;
+    width: 100%;
+
+    [class~="ant-select"] {
+        width: 100%;
+    }
 }

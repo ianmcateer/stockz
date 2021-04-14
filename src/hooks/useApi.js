@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import { useDeepCompareEffectNoCheck } from "use-deep-compare-effect";
 
 export const useApi = (service, ...options) => {
     const [data, setData] = useState(null);
@@ -17,7 +19,7 @@ export const useApi = (service, ...options) => {
         }
     };
 
-    useEffect(() => {
+    useDeepCompareEffectNoCheck(() => {
         fetchData();
     }, [...options]);
 
