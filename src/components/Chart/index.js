@@ -37,8 +37,8 @@ const Chart = () => {
                 },
             ]}
             type="candlestick"
-            width={1200}
-            height={1000}
+            width={900}
+            height={500}
             options={{
                 title: {
                     text: symbol,

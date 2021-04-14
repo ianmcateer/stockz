@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 
 import HomePage from "../HomePage";
+import Screener from "../Screener";
 import "./index.css";
 import Stocks from "../Stocks";
 
@@ -45,6 +46,7 @@ function App() {
                     <Content>
                         <Switch>
                             <Route path="/stocks" component={Stocks} />
+                            <Route path="/screener" component={Screener} />
                             <Route path="/" component={HomePage}></Route>
                         </Switch>
                     </Content>

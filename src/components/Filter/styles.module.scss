@@ -1,0 +1,120 @@
+.Filter {
+    color: red;
+}
+.Header {
+    font-size: 1.1rem;
+
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    white-space: nowrap;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    z-index: 1;
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+        -webkit-transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    left: 0px;
+
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    white-space: nowrap;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px 10px;
+    position: relative;
+
+    line-height: 20px;
+    color: #0b90ff;
+    text-align: center;
+
+    &:after {
+        left: 50%;
+        width: 18px;
+        bottom: 0px;
+        height: 2px;
+        content: "";
+        display: block;
+        position: absolute;
+        transform: translate(-50%, 0);
+        background: #0b90ff;
+        border-radius: 1px;
+    }
+}
+
+.Content {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    font-size: 12px !important;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    width: 100%;
+    height: calc(100% - 45px);
+
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    font-size: 12px !important;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    position: relative;
+    height: 100%;
+    overflow: hidden !important;
+    overflow-anchor: none;
+    touch-action: auto;
+}
+
+.SectorFilter {
+    line-height: 1;
+    font-family: OpenSans-SemiBold, OpenSans-Regular, SourceHanSansCN-Regular,
+        PingFangSC-Medium, PingFangSC-Regular, SourceHanSansCN-Normal, Arial,
+        Helvetica, sans-serif !important;
+    word-wrap: break-word;
+    font-size: 12px !important;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    user-select: none;
+    position: relative;
+    padding: 0 10px 20px;
+}
