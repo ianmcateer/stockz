@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Filter from "../../components/Filter";
+import ScreenerList from "../../components/ScreenerList";
 import styles from "./styles.module.scss";
 
 const Screener = () => {
+    const [filter, setFilter] = useState({});
+
     return (
         <div className={styles.Screener}>
-            <Filter />
+            <Filter setFilter={setFilter} filter={filter} />
+            <ScreenerList filter={filter} />
         </div>
     );
 };

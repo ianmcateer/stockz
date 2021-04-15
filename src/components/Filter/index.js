@@ -6,13 +6,7 @@ import styles from "./styles.module.scss";
 import { useApi } from "../../hooks/useApi";
 import { stockScreener } from "../../services/requests";
 
-const Filter = () => {
-    const [filter, setFilter] = useState({});
-
-    const [data] = useApi(stockScreener, filter);
-
-    const unique = uniqBy(data, (item) => item.sector);
-
+const Filter = ({ setFilter, filter }) => {
     const knownSectors = [
         "Technology",
         "Consumer Cyclical",
@@ -179,7 +173,7 @@ const Filter = () => {
         "Coal",
     ];
 
-    const handleChange = (value, two) => {
+    const handleChange = (value) => {
         setFilter({
             sector: value,
         });
@@ -198,7 +192,7 @@ const Filter = () => {
                         <div className={styles.dropdown}>
                             <Input.Group compact name="sector">
                                 <Select
-                                    placeholder="sector"
+                                    placeholder="Sector"
                                     value={filter.sector}
                                     onChange={handleChange}
                                 >

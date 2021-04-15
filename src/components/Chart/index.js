@@ -20,6 +20,8 @@ const Chart = () => {
         historical.length &&
         historical.reverse().map((item) => {
             return { x: new Date(item.date).getTime(), y: item.close };
+
+            // for candlestick chart..
             // return [
             //     new Date(item.date).getTime(),
             //     item.open,
@@ -49,14 +51,13 @@ const Chart = () => {
                         show: true,
                     },
                 },
-
                 title: {
                     text: symbol,
-                    align: "left",
+                    align: "center",
                 },
                 subtitle: {
                     text: "Price Movements",
-                    align: "left",
+                    align: "center",
                 },
                 dataLabels: {
                     enabled: false,

@@ -1,5 +1,6 @@
 .Screener {
-    width: 500px;
+    display: grid;
+    grid-template-columns: 500px 1fr;
     height: 100%;
     background: #ffffff;
 }

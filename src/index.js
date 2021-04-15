@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "normalize.css";
 import "antd/dist/antd.css";
 
+import "./config";
+
 import StoreProvider from "./context/StoreContext";
 import "./index.css";
 

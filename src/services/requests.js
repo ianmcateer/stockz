@@ -24,7 +24,7 @@ export const fetchNews = async () => {
 export const fetchDailyHistoricalPrice = async (symbol, from, to) => {
     try {
         const { data } = await get(
-            `/api/v3/historical-price-full/${symbol}?from=2019-03-12&to=2020-03-12`
+            `/api/v3/historical-price-full/${symbol}?from=2019-03-12&to=2021-03-12`
         );
         return data;
     } catch (err) {
