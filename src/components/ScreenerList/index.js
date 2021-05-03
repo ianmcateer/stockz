@@ -1,19 +1,20 @@
 import React from "react";
 import { Table } from "antd";
+import { Link } from "react-router-dom";
 
 import { useApi } from "../../hooks/useApi";
 import { stockScreener } from "../../services/requests";
 import styles from "./styles.module.scss";
 
 const ScreenerList = ({ filter }) => {
-    const [data] = useApi(stockScreener, filter);
-    console.log(data, "data");
+    const [data, isLoading] = useApi(stockScreener, filter);
 
     const columns = [
         {
             title: "Symbol",
             dataIndex: "symbol",
             key: "symbol",
+            render: (value) => <Link to={`/stocks/${value}`}>{value}</Link>,
         },
         {
             title: "Name",
@@ -62,6 +63,8 @@ const ScreenerList = ({ filter }) => {
                     pageSizeOptions: [20, 50, 100],
                     showLessItems: true,
                 }}
+                loading={isLoading}
+                size="small"
             />
         </div>
     );

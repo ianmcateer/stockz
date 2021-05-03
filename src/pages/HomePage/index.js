@@ -1,20 +1,20 @@
 import React from "react";
-import { Image, PageHeader, Card, Avatar, Spin, Space } from "antd";
+import { Spin } from "antd";
 
 import { useApi } from "../../hooks/useApi";
 import { fetchNews } from "../../services/requests";
 import styles from "./styles.module.scss";
 
 const HomePage = () => {
-    const [data, isLoading, error] = useApi(fetchNews);
+    const [data, isLoading] = useApi(fetchNews);
 
     const list =
         data &&
         data.map((item) => {
             return (
-                <a href={item.url} target="blank">
+                <a href={item.url} target="blank" key={item.title}>
                     <div className={styles.imageContainer}>
-                        <img src={item.image} alt="image" />
+                        <img src={item.image} alt={item.title} />
                     </div>
                     <div className={styles.articleContent}>
                         <h4>{item.title}</h4>

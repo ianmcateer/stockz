@@ -7,12 +7,19 @@ import StockList from "../../components/StockList";
 import Chart from "../../components/Chart";
 import styles from "./styles.module.scss";
 import { StoreContext } from "../../context/StoreContext";
+import { useParams } from "react-router";
 
 const Stocks = () => {
     const [data, isLoading, error] = useApi(fetchSymbolsList);
     const [query, setQuery] = useState("");
     const [filteredData, setFilteredData] = useState();
-    const { selectedStock } = useContext(StoreContext);
+    const { selectedStock, setSelectedStock } = useContext(StoreContext);
+
+    const { symbol } = useParams();
+
+    useEffect(() => {
+        setSelectedStock(symbol);
+    }, [symbol, setSelectedStock]);
 
     useEffect(() => {
         const queryUpper = query?.toUpperCase();

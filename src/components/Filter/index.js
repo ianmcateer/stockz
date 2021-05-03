@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, Select } from "antd";
-import { uniqBy } from "lodash";
 
 import styles from "./styles.module.scss";
-import { useApi } from "../../hooks/useApi";
-import { stockScreener } from "../../services/requests";
 
 const Filter = ({ setFilter, filter }) => {
     const knownSectors = [
@@ -196,6 +193,9 @@ const Filter = ({ setFilter, filter }) => {
                                     value={filter.sector}
                                     onChange={handleChange}
                                 >
+                                    <Select.Option value={""}>
+                                        --ANY--
+                                    </Select.Option>
                                     {knownSectors.map((sector) => (
                                         <Select.Option value={sector}>
                                             {sector}

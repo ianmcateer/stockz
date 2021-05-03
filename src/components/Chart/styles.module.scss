@@ -1,5 +1,32 @@
 .Chart {
     margin: 0;
-    height: 500px;
+    height: 100%;
     width: 100%;
+    padding: 15px;
+    background-color: rgb(38, 50, 72);
+    h1 {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        font-size: 1.2rem;
+        color: rgb(75, 225, 181);
+    }
+
+    .datePicker {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .spinner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    [class~="ant-table-wrapper"] {
+        background-color: white;
+        margin-top: 10px;
+    }
 }

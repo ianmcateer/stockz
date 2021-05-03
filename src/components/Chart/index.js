@@ -5,8 +5,13 @@ import moment from "moment";
 import { StoreContext } from "../../context/StoreContext";
 import { useApi } from "../../hooks/useApi";
 import { fetchDailyHistoricalPrice } from "../../services/requests";
+import { DatePicker, Spin, Table } from "antd";
 
 import styles from "./styles.module.scss";
+
+const { RangePicker } = DatePicker;
+
+const dateFormat = "YYYY/MM/DD";
 
 const Chart = () => {
     const chartContainerRef = useRef();
@@ -14,13 +19,27 @@ const Chart = () => {
     const resizeObserver = useRef();
 
     const { selectedStock } = useContext(StoreContext);
+    const [priceSeries, setPriceSeries] = useState([]);
+    const [dateRange, setDateRange] = useState(["2018-03-12", "2021-03-12"]);
 
-    const [data, isLoading, error] = useApi(
+    const [dateFrom, dateTo] = dateRange;
+
+    const [data, isLoading] = useApi(
         fetchDailyHistoricalPrice,
-        selectedStock
+        selectedStock,
+        dateFrom,
+        dateTo
     );
 
     useEffect(() => {
+        if (!data) return;
+
+        if (document.getElementById("chart") !== null) {
+            document.getElementById("chart").innerHTML = "";
+        }
+
+        if (!chartContainerRef.current) return;
+
         chart.current = createChart(chartContainerRef.current, {
             width: chartContainerRef.current.clientWidth,
             height: chartContainerRef.current.clientHeight,
@@ -40,25 +59,30 @@ const Chart = () => {
                 mode: CrosshairMode.Normal,
             },
             priceScale: {
+                autoScale: true,
                 borderColor: "#485c7b",
             },
             timeScale: {
+                autoScale: true,
                 borderColor: "#485c7b",
             },
         });
 
-        const priceData =
-            data &&
+        const priceData = [];
+
+        data &&
             data.historical &&
-            data.historical.reverse().map((stock) => {
-                return {
-                    time: moment(stock.date).format("YYYY-MM-DD"),
+            data.historical.reverse().forEach((stock) => {
+                priceData.push({
+                    time: moment(stock.date).format(),
                     open: stock.open,
                     high: stock.high,
                     low: stock.low,
                     close: stock.close,
-                };
+                });
             });
+
+        setPriceSeries(priceData);
 
         const candleSeries = chart.current.addCandlestickSeries({
             upColor: "#4bffb5",
@@ -70,54 +94,103 @@ const Chart = () => {
         });
 
         candleSeries.setData(priceData || []);
-
-        // const areaSeries = chart.current.addAreaSeries({
-        //   topColor: 'rgba(38,198,218, 0.56)',
-        //   bottomColor: 'rgba(38,198,218, 0.04)',
-        //   lineColor: 'rgba(38,198,218, 1)',
-        //   lineWidth: 2
-        // });
-
-        // areaSeries.setData(areaData);
-
-        // const volumeSeries = chart.current.addHistogramSeries({
-        //     color: "#182233",
-        //     lineWidth: 2,
-        //     priceFormat: {
-        //         type: "volume",
-        //     },
-        //     overlay: true,
-        //     scaleMargins: {
-        //         top: 0.8,
-        //         bottom: 0,
-        //     },
-        // });
-
-        // volumeSeries.setData(volumeData);
     }, [data]);
 
     // Resize chart on container resizes.
-    // useEffect(() => {
-    //     resizeObserver.current = new ResizeObserver((entries) => {
-    //         const { width, height } = entries[0].contentRect;
-    //         chart.current.applyOptions({ width, height });
-    //         setTimeout(() => {
-    //             chart.current.timeScale().fitContent();
-    //         }, 0);
-    //     });
+    useEffect(() => {
+        if (!data) return;
 
-    //     resizeObserver.current.observe(chartContainerRef.current);
+        resizeObserver.current = new ResizeObserver((entries) => {
+            const { width, height } = entries[0].contentRect;
+            chart.current.applyOptions({ width, height });
+            setTimeout(() => {
+                chart.current.timeScale().fitContent();
+            }, 0);
+        });
 
-    //     return () => resizeObserver.current.disconnect();
-    // }, [data]);
+        resizeObserver.current.observe(chartContainerRef.current);
+
+        return () =>
+            resizeObserver.current && resizeObserver.current.disconnect();
+    }, [data, dateRange]);
+
+    const columns = [
+        {
+            title: "Date",
+            dataIndex: "label",
+            key: "label",
+            render: (value) => {
+                return <p>{value}</p>;
+            },
+        },
+        {
+            title: "Open",
+            dataIndex: "open",
+            key: "open",
+        },
+        {
+            title: "High",
+            dataIndex: "high",
+            key: "high",
+        },
+        {
+            title: "Low",
+            dataIndex: "low",
+            key: "low",
+            render: (value) => {
+                return <p>{value}</p>;
+            },
+        },
+        {
+            title: "Close",
+            dataIndex: "close",
+            key: "close",
+            render: (value) => {
+                return <p>{value}</p>;
+            },
+        },
+    ];
 
     return (
         <div className={styles.Chart}>
-            <div
-                ref={chartContainerRef}
-                className="chart-container"
-                style={{ height: "100%" }}
-            />
+            <h1>
+                {selectedStock} Chart {isLoading && <Spin size="default" />}
+            </h1>
+            <div className={styles.datePicker}>
+                <RangePicker
+                    bordered
+                    onChange={(_momentDate, dateString) => {
+                        setDateRange([...dateString]);
+                    }}
+                    value={[
+                        moment(dateFrom, dateFormat),
+                        moment(dateTo, dateFormat),
+                    ]}
+                />
+            </div>
+            {priceSeries && (
+                <>
+                    <div
+                        ref={chartContainerRef}
+                        className={isLoading ? styles.loadingChart : ""}
+                        style={{ height: "50%" }}
+                        id="chart"
+                    />
+                    <Table
+                        dataSource={data && data.historical}
+                        columns={columns}
+                        bordered
+                        scroll={{ y: 350 }}
+                        size="small"
+                        loading={isLoading}
+                        rowKey={(record) => record.label}
+                        pagination={{
+                            pageSize: 100,
+                            hideOnSinglePage: true,
+                        }}
+                    />
+                </>
+            )}
         </div>
     );
 };
