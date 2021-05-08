@@ -1,4 +1,10 @@
 .screenList {
     padding: 20px;
     background-color: #001529;
+
+    [class~="ant-pagination"] {
+        background-color: white;
+        margin: 0;
+        padding: 10px;
+    }
 }

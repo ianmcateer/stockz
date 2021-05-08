@@ -5,7 +5,7 @@ import ScreenerList from "../../components/ScreenerList";
 import styles from "./styles.module.scss";
 
 const Screener = () => {
-    const [filter, setFilter] = useState({});
+    const [filter, setFilter] = useState({ sector: "" });
 
     return (
         <div className={styles.Screener}>
